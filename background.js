@@ -13,9 +13,10 @@ chrome.runtime.onConnect.addListener(function(port){
 		
 	port.onMessage.addListener(function(msg){
 		console.log("(background.js) message received!!");
+		var receiver;
 		for (var channel in connections) {
 			if (channel != port.name) {
-				var receiver = connections[channel];
+				receiver = connections[channel];
 				receiver.postMessage(msg);
 			}
 		}
