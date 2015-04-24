@@ -1,0 +1,28 @@
+{
+    "name": "Test",
+    "version": "0.1.0",
+    "manifest_version": 2,
+    "description": "playground",
+    "background": {
+        "scripts": [
+            "require_libs.js",
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": {
+            "38": "playground.jpg"
+        },
+        "icons": {
+            "128": "playground.jpg"
+        },
+        "default_title": "test"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "activeTab"
+    ]
+}
