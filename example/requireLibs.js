@@ -1,6 +1,7 @@
 function requireLibs(callback) {
   var count = 0
   var libs = [
+    "DailyBugle.js",
     "a.js",
     "b.js"
   ];

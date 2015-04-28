@@ -1,0 +1,22 @@
+{
+  "name": "daily-bugle",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mistermoe/chrome-extension-message-passing",
+  "authors": [
+    "mistermoe <m.jangda88@gmail.com>"
+  ],
+  "description": "pub/sub for chrome extensions",
+  "keywords": [
+    "chrome-extension",
+    "pub/sub"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "example/*"
+  ]
+}
