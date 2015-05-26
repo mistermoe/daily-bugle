@@ -7,7 +7,8 @@ var DailyBugle = function() {
 		this.port.onMessage.addListener(func);
 	}
 
-	this.publish = function(channel, args) {
-		this.port.postMessage({publishTo: channel, args: args});
+	this.publish = function(channel, args, opts) {
+		this.port.postMessage({publishTo: channel, args: args, opts: opts});
 	}
+
 }

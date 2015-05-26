@@ -1,5 +1,6 @@
 var PrintingPress = {
 	connections: {},
+	backgroundChannels: {},
 	print: function() {
 
 		chrome.runtime.onConnect.addListener(function(port){
@@ -7,7 +8,22 @@ var PrintingPress = {
 
 				
 			port.onMessage.addListener(function(msg){
-				if (msg.subscribeTo) {
+				console.log(msg);
+				if (msg.opts && msg.opts.background) {
+					if (PrintingPress.backgroundChannels[msg.publishTo]) {
+						for (var i = 0; i < PrintingPress.backgroundChannels[msg.publishTo].length; i += 1) {
+							if (msg.args) {
+
+								PrintingPress.backgroundChannels[msg.publishTo][i](msg.args);
+							}
+							else {
+								PrintingPress.backgroundChannels[msg.publishTo][i]();
+							}
+						}
+					}
+				}
+				
+				else if (msg.subscribeTo) {
 					console.log("(PrintingPress.js) client subscribed to " + msg.subscribeTo + ".");
 					if (PrintingPress.connections[msg.subscribeTo]) {
 						PrintingPress.connections[msg.subscribeTo].push(port);
@@ -21,6 +37,7 @@ var PrintingPress = {
 					var 
 						subscribers = PrintingPress.connections[msg.publishTo],
 						subscriber;
+
 					for (var i = 0; i < subscribers.length; i += 1) {
 						(function(subscriber){
 							if (msg.args) {
@@ -34,5 +51,13 @@ var PrintingPress = {
 				}
 			});
 		});
+	},
+	on: function(channel, func) {
+		if (PrintingPress.backgroundChannels[channel]) {
+			PrintingPress.backgroundChannels[channel].push(func)
+		}
+		else {
+			PrintingPress.backgroundChannels[channel] = [func];
+		}
 	}
 }
