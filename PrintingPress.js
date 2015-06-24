@@ -74,5 +74,26 @@ var PrintingPress = {
     unsubscribeAll: function() {
         this.connections = {};
         this.backgroundChannels = {};
+    },
+
+    publish: function(channel, args, opts) {
+        var 
+            subscribers = this.connections[channel],
+            subscriber;
+
+        for (var i = 0; i < subscribers.length; i += 1) {
+            (function(subscriber){
+                if ( !subscriber ) {
+                    return;
+                }
+
+                if (args) {
+                    subscriber.postMessage(args);
+                }
+                else {
+                    subscriber.postMessage(null);
+                }
+            })(subscribers[i]);
+        }
     }
 }
