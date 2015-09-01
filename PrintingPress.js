@@ -76,6 +76,15 @@ var PrintingPress = {
         this.backgroundChannels = {};
     },
 
+    unsubscribe: function(opts) {
+        if (!opts)
+            return;
+        if (opts.tabChannels)
+            this.connections = {};
+        if (opts.backgroundChannels)
+            this.backgroundChannels = {};
+    },
+
     publish: function(channel, args, opts) {
         var 
             subscribers = this.connections[channel],
