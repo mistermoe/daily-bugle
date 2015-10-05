@@ -5,7 +5,12 @@ var DailyBugle = function() {
     var channelFuncs = this.channels[response.channel];
     for (var i = 0; i < channelFuncs.length; i += 1) {
       (function(func){
-        func(response.args);
+        try {
+          func(response.args);
+        }
+        catch (e) {
+          console.log(e);
+        }
       })(channelFuncs[i]);
     }
   }.bind(this));
